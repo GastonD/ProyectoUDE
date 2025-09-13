@@ -4,7 +4,6 @@
 
 import pandas as pd
 import os
-import json
 
 # --- Definición de Rutas ---
 # Establecemos una variable con el nombre de la carpeta donde se encuentran los datasets
@@ -29,13 +28,12 @@ csv_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), dataset
 try:
     # Leer el archivo JSON y cargarlo en un DataFrame de pandas de acuerdo a la consigna
     print(f"Leyendo el archivo JSON desde: {json_file_path}")
-    data = json.loads(open(json_file_path).read())
-    print(data["headers"])
-    df = pd.DataFrame(data["values"], columns=data["headers"])
+    df = pd.read_json(json_file_path)
 
     # Si el archivo es leido correctamente mostramos las primeras 5 filas utilizando print(df.head())
     # Como método de validación interno
     print("\nDatos leídos del JSON exitosamente. Mostrando las primeras 5 filas:")
+    df.to_string()
     print(df.head())
 
 
