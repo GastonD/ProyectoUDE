@@ -27,14 +27,22 @@ csv_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), dataset
 # Capturamos el más común que es que el archivo a abrir no exista
 # Y luego una excepción genérica para el resto de los errores posibles
 try:
-    # Leer el archivo JSON y cargarlo en un DataFrame de pandas de acuerdo a la consigna
-    print(f"Leyendo el archivo JSON desde: {json_file_path}")
 
+    # Inicialización del programa
+    print("=" * 100)
+    print("Convertidor de JSON a CSV usando Pandas")
+    print("=" * 100)
+    print("\n")
+    # Leer el archivo JSON y cargarlo en un DataFrame de pandas de acuerdo a la consigna
+    # Mostramos la ruta del archivo JSON que se está leyendo
+    print(f"Leyendo el archivo JSON desde: {json_file_path}")
+    print("\n")
     #Abro el archivo JSON y utilizo el método para abrirlo:
     with open(json_file_path, 'r', encoding='utf-8') as file:
         data = json.load(file)
 
-    # Con algunos de los datasets que nos descargamos tuvimos problemas para que queden en el formato correcto
+    # Con algunos de los datasets que nos descargamos tuvimos problemas para que los datos
+    # queden en el formato correcto al pasarlo a CSV
     # Encontramos esta solución que depende el tipo de JSON que recibe 
     # Genera el dataFrame con métodos distintos
     if isinstance(data, dict):
@@ -47,16 +55,20 @@ try:
 
     # Si el archivo es leido correctamente mostramos las primeras 5 filas utilizando print(df.head())
     # Como método de validación interno
+    print("=" * 100)
     print("\nDatos leídos del JSON exitosamente. Mostrando las primeras 5 filas:")
     print(df.head())
-
-
+    print("=" * 100)
+    print("\n")
+    
     # Escribimos el DataFrame en un CSV
     # Utilizamos la misma función del DataFrame to_csv() para generar el CSV
     # En la ruta que generamos anteriormente
+    print("=" * 100)
     print(f"\nGuardando los datos en formato CSV en: {csv_file_path}")
     df.to_csv(csv_file_path, index=True, encoding='utf-8')
-
+    print("=" * 100)
+    print("\n")
     # Finalmente hacemos una confirmación para el usuario si el CSV se generó exitosamente.
     print("\n¡Proceso completado! El archivo CSV ha sido creado exitosamente.")
 
